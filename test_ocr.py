@@ -55,43 +55,60 @@ def match_template(image, template):
 
 
 # main
-image = cv2.imread('./images/1/jaune.PNG')
+
+# images vars
+img_dir = "./images/";
+img_names = {'jaune.png', 'rouge.png', 'vert.jpg', 'violet.png'}
+
+# Adding custom options for tesseract
+custom_config = r'-c tessedit_char_whitelist=0123456789 --oem 1 --psm 9'
+
+low_mask = np.array([0,0,0])
+
+for i in range(1, 21):
+    for name in img_names:
+        image = cv2.imread(img_dir + str(i) + '/' + str(i) + name)
+        #cv2.imshow('image', image)
+        #cv2.waitKey(0)
+        
+        #black_mask = cv2.inRange(image, low_black, low_black)
+        #red = cv2.bitwise_and(image, image, mask=black_mask)
+        
+        
+        # split the characters with boxes
+        h, w, c = image.shape
+        boxes = pytesseract.image_to_boxes(image, config=custom_config)
+        img = image
+        for b in boxes.splitlines():
+            b = b.split(' ')
+            img = cv2.rectangle(image, (int(b[1]), h - int(b[2])), (int(b[3]), h - int(b[4])), (0, 255, 0), 2)
+        
+        #cv2.imshow('test', img)
+        #cv2.waitKey(0)
+        
+        img_str = pytesseract.image_to_string(image, config=custom_config)
+        print(name + '(' + str(i) + '):' + img_str)
+    
+# destroy all opened windows created by opencv
+#cv2.destroyAllWindows()
+
+
+#image = cv2.imread('./images/2/2jaune.png')
 #cv2.imshow('image', image)
 #cv2.waitKey(0)
 
-gray = get_grayscale(image)
+#gray = get_grayscale(image)
 #cv2.imshow('gray', gray)
 #cv2.waitKey(0)
 
-thresh = thresholding(gray)
+#thresh = thresholding(gray)
 #cv2.imshow('thresh', thresh)
 #cv2.waitKey(0)
 
-opening = opening(gray)
+#opening = opening(gray)
 #cv2.imshow('opening', opening)
 #cv2.waitKey(0)
 
-canny = canny(gray)
+#canny = canny(gray)
 #cv2.imshow('canny', canny)
 #cv2.waitKey(0)
-
-
-# Adding custom options for tesseract
-custom_config = r'--oem 3 --psm 13'
-
-# split the characters with boxes
-h, w, c = image.shape
-boxes = pytesseract.image_to_boxes(image, config=custom_config)
-img = image
-for b in boxes.splitlines():
-    b = b.split(' ')
-    img = cv2.rectangle(image, (int(b[1]), h - int(b[2])), (int(b[3]), h - int(b[4])), (0, 255, 0), 2)
-
-cv2.imshow('test', img)
-cv2.waitKey(0)
-
-# destroy all opened windows created by opencv
-cv2.destroyAllWindows()
-
-img_str = pytesseract.image_to_string(image, config=custom_config)
-print(img_str)
