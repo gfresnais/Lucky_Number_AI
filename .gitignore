@@ -1,3 +1,3 @@
-/venv/bin
-/venv/lib
-/venv/share
+/venv
+/App/src/__pycache__
+/App/src/webcam/__pycache__

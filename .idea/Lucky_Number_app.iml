@@ -7,4 +7,11 @@
     <orderEntry type="jdk" jdkName="Python 3.8 (Lucky_Number_app)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PyNamespacePackagesService">
+    <option name="namespacePackageFolders">
+      <list>
+        <option value="$MODULE_DIR$/App" />
+      </list>
+    </option>
+  </component>
 </module>
