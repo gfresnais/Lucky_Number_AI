@@ -1,13 +1,25 @@
+# -*- coding: utf-8 -*-
+
+"""
+@author: Gallien FRESNAIS
+"""
+
 from threading import Thread
 import cv2
 import numpy as np
 
 
+"""
+Uses OpenCV to capture a camera video stream
+"""
+
 class WebcamVideoStream:
     def __init__(self, src=0):
         self.stream = cv2.VideoCapture(src)
+        # sets the width and height of the stream
         self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
         self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        # reads the video stream to get the first frame
         (self.grabbed, self.frame) = self.stream.read()
         self.stopped = False
         # variable for image processing methods
@@ -18,6 +30,7 @@ class WebcamVideoStream:
         self.upper_range = np.array([180, 170, 150])
 
     def start(self):
+        # starts a new thread for capturing the video stream
         Thread(target=self.update, args=()).start()
         return self
 
@@ -37,6 +50,7 @@ class WebcamVideoStream:
     def closing(self, image):
         return cv2.morphologyEx(image, cv2.MORPH_CLOSE, self.kernel)
 
+    # applies a mask to the captured frame
     def mask_frame(self):
         # removes the noise (closing)
         blurred = self.closing(self.frame)

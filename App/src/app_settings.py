@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+"""
+@author: Gallien FRESNAIS
+"""
+
 # -- Game Info --
 APP_NAME = "Lucky Numbers AI"
 GAME_VERSION = 0.1
@@ -7,7 +13,6 @@ AUTHOR = "Gallien FRESNAIS, Lilian VALLÉE, Zineb KABBAB"
 # -- PyGame Variables --
 WINDOW_W = 700
 WINDOW_H = 500
-FRAMES = 140
 SCRIPT_DELAY = 40
 
 # -- Colors --

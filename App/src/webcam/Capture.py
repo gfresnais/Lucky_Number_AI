@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+"""
+@author: Gallien FRESNAIS
+"""
+
 import pygame
 import pygame.camera
 from pygame.locals import *
@@ -5,10 +11,14 @@ from pygame.locals import *
 pygame.init()
 pygame.camera.init()
 
+"""
+Uses pygame to capture a camera video stream
+"""
+
 
 class Capture(object):
     def __init__(self):
-        self.size = (640,480)
+        self.size = (640, 480)
         # create a display surface. standard pygame stuff
         self.display = pygame.display.set_mode(self.size, 0)
 
@@ -31,7 +41,7 @@ class Capture(object):
             self.snapshot = self.cam.get_image(self.snapshot)
 
         # blit it to the display surface.  simple!
-        self.display.blit(self.snapshot, (0,0))
+        self.display.blit(self.snapshot, (0, 0))
         pygame.display.flip()
 
     def main(self):
