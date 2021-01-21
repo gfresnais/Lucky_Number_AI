@@ -20,19 +20,19 @@ class Pioche:
     
     
     #fonction qui pioche un jeton dans la pioche et le retourne
-    def piocheJeton(self):
+    def pioche(self):
         taille = len(self.PIOCHE)
         index = random.Random()*taille
         
         return self.PIOCHE.pop(index)
         
     #fonction qui pioche un jeton donné dans la défausse
-    def piocheDefausse(self, jeton):
+    def defausse(self, jeton):
         index = self.PIOCHE.index(jeton)
         
         return self.PIOCHE.pop(index)
     
     #fonction qui ajoute un jeton à la défausse
-    def DefausseJeton(self, jeton):
+    def ajoutDefausse(self, jeton):
         self.PIOCHE.append(jeton)
     
