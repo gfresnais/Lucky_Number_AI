@@ -83,7 +83,6 @@ class JoueurIA:
         batch_size = 32
         game = Game()
         pioche = game.pioche
-        counter = 1
         scores = []
         global_counter = 0
         losses = [0]
@@ -119,26 +118,32 @@ class JoueurIA:
                 steps += 1
                 global_counter += 1
                 action = trainer.bestAction(state)
-                trainer.decay_epsilon()
+
                 check = False
                 while check:
                     next_state, reward, done, check = g.move(action)
                     next_state = np.reshape(next_state, [1, 16])
                     score += reward
-                    trainer.remember(state, action, reward, next_state, done)  # ici on enregistre le sample dans la mémoire
+                    trainer.remember(state, action, reward, next_state, done)
 
                 state = next_state
+
                 if global_counter % 100 == 0:
                     l = trainer.replay(batch_size)  # ici on lance le 'replay', c'est un entrainement du réseau
                     losses.append(l.history['loss'][0])
+
                 if done:
                     scores.append(score)
                     epsilons.append(trainer.epsilon)
+
                 if steps > 200:
                     break
             if e % 200 == 0:
                 print("episode: {}/{}, moves: {}, score: {}, epsilon: {}, loss: {}"
                       .format(e, episodes, steps, score, trainer.epsilon, losses[-1]))
+
             if e > 0 and e % snapshot == 0:
                 trainer.save(id='iteration-%s' % e)
+
         return scores, losses, epsilons
+

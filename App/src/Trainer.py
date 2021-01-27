@@ -1,3 +1,5 @@
+import time
+
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -60,3 +62,34 @@ class trainer:
         # Pick the action based on the predicted reward
         action = np.argmax(act_values[0])
         return action
+
+    def replay(self, batch_size):
+        batch_size = min(batch_size, len(self.memory))
+
+        minibatch = random.sample(self.memory, batch_size)
+
+        inputs = np.zeros((batch_size, self.state_size))
+        outputs = np.zeros((batch_size, self.action_size))
+
+        for i, (state, action, reward, next_state, done) in enumerate(minibatch):
+            target = self.model.predict(state)[0]
+            print("DEBUG : " + target)
+            if done:
+                target[action] = reward
+            else:
+                target[action] = reward + self.gamma * np.max(self.model.predict(next_state))
+
+            inputs[i] = state
+            outputs[i] = target
+
+        return self.model.evaluate(inputs, outputs, batch_size=batch_size, verbose=0)
+
+    def save(self, id=None, overwrite=False):
+        name = 'model'
+        if self.name:
+            name += '-' + self.name
+        else:
+            name += '-' + str(time.time())
+        if id:
+            name += '-' + id
+        self.model.save(name, overwrite=overwrite)
