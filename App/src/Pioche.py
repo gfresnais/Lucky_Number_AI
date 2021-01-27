@@ -14,16 +14,16 @@ class Pioche:
     DEFAUSSE = []
     
     def __init__(self):
-            
-        self.PIOCHE = json.load('Assets/pioche.json')
-        print(self.PIOCHE)
-    
+        with open("pioche.json", "r") as read_file:
+            list = json.load(read_file)
+        for i in range(len(list)):
+            jeton = list[i]
+            self.PIOCHE.append(jeton)
     
     #fonction qui pioche un jeton dans la pioche et le retourne
     def piocheJeton(self):
-        taille = len(self.PIOCHE)
-        index = random.Random()*taille
-        
+        index = random.randrange(len(self.PIOCHE))
+        print(self.PIOCHE[index])
         return self.PIOCHE.pop(index)
         
     #fonction qui pioche un jeton donné dans la défausse

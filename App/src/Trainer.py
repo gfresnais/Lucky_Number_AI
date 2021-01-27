@@ -8,12 +8,10 @@ from collections import deque
 import random
 import numpy as np
 
-from App.src.JoueurIA import JoueurIA
-
 
 class trainer:
 
-    def __init__(self, name=None, joueur=None, learning_rate=0.001, epsilon_decay=0.9999, batch_size=30, memory_size=3000):
+    def __init__(self, name=None, learning_rate=0.001, epsilon_decay=0.9999, batch_size=30, memory_size=3000):
         self.state_size = 17
         self.action_size = 16
         self.gamma = 0.9
@@ -23,7 +21,6 @@ class trainer:
         self.learning_rate = learning_rate
         self.memory = deque(maxlen=memory_size)
         self.batch_size = batch_size
-
         self.name = name
         if name is not None :
             model = keras.load_model("App/res/Assets/Model-" + name)
@@ -36,11 +33,6 @@ class trainer:
             model.compile(loss='mse', optimizer=keras.Adam(lr=self.learning_rate))
 
         self.model = model
-
-        if joueur is not None :
-            self.Joueur = joueur
-        else:
-            self.joueur = JoueurIA()
 
     def remember(self, state, action, reward, next_state, done):
         self.memory.append([state, action, reward, next_state, done])
