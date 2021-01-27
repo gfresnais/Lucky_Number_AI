@@ -3,6 +3,8 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 from collections import deque
+import random
+import numpy as np
 
 from App.src.JoueurIA import JoueurIA
 
@@ -40,3 +42,21 @@ class trainer:
 
     def remember(self, state, action, reward, next_state, done):
         self.memory.append([state, action, reward, next_state, done])
+
+    def randomAction(self):
+        return random.randrange(self.action_size)
+
+    def bestAction(self, state, rand=True):
+
+        self.epsilon *= self.epsilon_decay
+
+        if rand and random.rand() <= self.epsilon:
+            # The agent acts randomly
+            return random.randrange(self.action_size)
+
+        # Predict the reward value based on the given state
+        act_values = self.model.predict(np.array([state]))
+
+        # Pick the action based on the predicted reward
+        action = np.argmax(act_values[0])
+        return action

@@ -5,7 +5,6 @@ Created on Thu Jan  7 14:53:05 2021
 @author: vallee
 """
 import numpy as np
-import random
 
 from App.src.Game import Game
 
@@ -70,9 +69,6 @@ class JoueurIA:
         else:
             return newPlateau, -1, False, False
 
-    def randomAction(self):
-        return random.randrange(16)
-
     def reset(self, firstNumber, secondNumber, thirdNumber, fourthNumber):
         plateau = np.eye(4, 4, int())
         plateau[0, 0] = firstNumber
@@ -122,7 +118,7 @@ class JoueurIA:
             while not done:
                 steps += 1
                 global_counter += 1
-                action = trainer.get_best_action(state) #TODO
+                action = trainer.bestAction(state)
                 trainer.decay_epsilon()
                 check = False
                 while check:
