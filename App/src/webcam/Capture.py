@@ -13,6 +13,8 @@ pygame.camera.init()
 
 """
 Uses pygame to capture a camera video stream
+
+TESTING ONLY
 """
 
 

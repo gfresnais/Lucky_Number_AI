@@ -4,11 +4,9 @@
 @author: Gallien FRESNAIS
 """
 
-import pygame
-
 # - Local - #
-from App.src.app_functions import *
-from App.src.app_settings import *
+from App.src.pygame_test.app_functions import *
+from App.src.pygame_test.app_settings import *
 
 """
 Handles the title screen

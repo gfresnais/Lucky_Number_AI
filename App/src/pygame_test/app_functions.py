@@ -8,7 +8,7 @@ import pygame
 from pygame.locals import *
 
 # - Local - #
-from App.src.app_settings import *
+from App.src.pygame_test.app_settings import *
 
 # pygame.mixer.init()
 

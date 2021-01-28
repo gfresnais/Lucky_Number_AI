@@ -5,8 +5,8 @@
 """
 
 # - Local - #
-from App.src.app_menus import *
-from App.src.app_settings import *
+from App.src.pygame_test.app_menus import *
+from App.src.pygame_test.app_settings import *
 
 # - Global variables - #
 decision_made = False
