@@ -2,9 +2,7 @@
 
 class Jeton:
 
-    def __init__(self, number, color):
+    def __init__(self, number=0, color="blanc"):
         self.number = number
         self.color = color
-
-    def get_number(self):
-        return self.number
+        self.image = 'App/res/images/'+ str(number) +'/'+ str(number) + color +'.png'

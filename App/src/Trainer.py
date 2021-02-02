@@ -9,7 +9,7 @@ import random
 import numpy as np
 
 
-class trainer:
+class Trainer:
 
     def __init__(self, name=None, learning_rate=0.001, epsilon_decay=0.9999, batch_size=30, memory_size=3000):
         self.state_size = 17
@@ -30,7 +30,7 @@ class trainer:
             model.add(layers.Dense(64, activation='relu'))
             model.add(layers.Dense(32, activation='relu'))
             model.add(layers.Dense(self.action_size, activation='linear'))
-            model.compile(loss='mse', optimizer=keras.Adam(lr=self.learning_rate))
+            model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=self.learning_rate))
 
         self.model = model
 
@@ -40,13 +40,14 @@ class trainer:
     def randomAction(self):
         return random.randrange(self.action_size)
 
-    def bestAction(self, state, rand=True):
-
+    def actu_epsilon(self):
         self.epsilon *= self.epsilon_decay
+
+    def bestAction(self, state, rand=True):
 
         if rand and random.rand() <= self.epsilon:
             # The agent acts randomly
-            return random.randrange(self.action_size)
+            return self.randomAction()
 
         # Predict the reward value based on the given state
         act_values = self.model.predict(np.array([state]))
