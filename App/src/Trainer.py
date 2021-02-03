@@ -45,7 +45,7 @@ class Trainer:
 
     def bestAction(self, state, rand=True):
 
-        if rand and random.rand() <= self.epsilon:
+        if rand and random.random() <= self.epsilon:
             # The agent acts randomly
             return self.randomAction()
 
@@ -66,7 +66,6 @@ class Trainer:
 
         for i, (state, action, reward, next_state, done) in enumerate(minibatch):
             target = self.model.predict(state)[0]
-            print("DEBUG : " + target)
             if done:
                 target[action] = reward
             else:

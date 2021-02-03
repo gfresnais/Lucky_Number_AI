@@ -28,44 +28,46 @@ class JoueurIA:
         plateau[2][2] = setDeJeton[2]
         plateau[3][3] = setDeJeton[3]
         self.plateau = plateau
-        self.jeton = 0
+        self.jeton = Jeton()
 
     #TODO
-    def verification(self, newPlateau):
-        for ligne in range(4):
-            for colone in range(4):
-                if self.plateau[ligne][colone] != newPlateau[ligne][colone]:
-                    number = newPlateau[ligne][colone].number
+    def verification(self, newPlateau, ligne, colonne):
+        number = newPlateau[ligne][colonne].number
+        if ligne != 0:
+            for testLigne in range(ligne):
+                if newPlateau[testLigne][colonne].number != 0:
+                    if number <= newPlateau[testLigne][colonne].number:
+                        return False
 
-                    if ligne != 0:
-                        for testLigne in range(ligne):
-                            if number <= newPlateau[testLigne][colone].number != 0:
-                                return False
+        if colonne != 0:
+            for testColone in range(colonne):
+                if newPlateau[ligne][testColone].number != 0:
+                    if number <= newPlateau[ligne][testColone].number:
+                        return False
 
-                    if colone != 0:
-                        for testColone in range(colone):
-                            if number <= newPlateau[ligne][testColone].number != 0:
-                                return False
+        if ligne != 3:
+            for testLigne in range(ligne+1, 4):
+                if newPlateau[testLigne][colonne].number != 0:
+                    if number >= newPlateau[testLigne][colonne].number:
+                        return False
 
-                    if ligne != 3:
-                        for testLigne in range(ligne+1, 4):
-                            if number <= newPlateau[testLigne][colone].number != 0:
-                                return False
+        if colonne != 3:
+            for testColone in range(colonne + 1, 4):
+                if newPlateau[ligne][testColone].number != 0:
+                    if number >= newPlateau[ligne][testColone].number:
+                        return False
+        return True
 
-                    if colone != 3:
-                        for testColone in range(colone + 1, 4):
-                            if number <= newPlateau[ligne][testColone].number != 0:
-                                return False
-                    self.plateau = newPlateau
-                    return True
-
-    def getState(self):
+    def getState(self, getJeton=True):
         state = []
         for i in range(4):
             for j in range(4):
                 state.append(self.plateau[i][j].number)
-        state.append(self.jeton)
-        state = np.reshape(state, [1, 17])
+        if getJeton:
+            state.append(self.jeton.number)
+            state = np.reshape(state, [1, 17])
+        else:
+            state = np.reshape(state, [1, 16])
         return state
 
     def newJeton(self, jeton):
@@ -84,7 +86,7 @@ class JoueurIA:
         ligne = position // 4
         colonne = position % 4
         newPlateau[ligne][colonne] = jeton
-        if self.verification(newPlateau):
+        if self.verification(newPlateau, ligne, colonne):
             if self.checkWin(newPlateau):
                 return newPlateau, 10, True, True, self.plateau[ligne][colonne]
             else:
@@ -112,7 +114,7 @@ class JoueurIA:
         index = 0
         for i in range(4):
             for j in range(4):
-                self.plateau[i][j] = NewState[0][index]
+                self.plateau[i][j] = NewState[index]
                 index += 1
 
     def aff_plateau(self):
@@ -142,22 +144,24 @@ class JoueurIA:
                     steps += 1
                     jeton = self.newJeton(pioche.piocheJeton())
                     state = self.getState()
-                    self.aff_plateau()
-                    print('jeton :' + str(jeton.number))
+                    # self.aff_plateau()
+                    # print('jeton :' + str(jeton.number))
                     check = False
                     while not check:
                         position = trainer.randomAction()
-                        print(str(position))
-                        next_state, reward, done, check, defausse = self.poseJeton(jeton, position)
-                        next_state = np.reshape(next_state, [1, 16])
+                        # print(str(position))
+                        newPlateau, reward, done, check, defausse = self.poseJeton(jeton, position)
+                        next_state = self.getState(False)
                         trainer.remember(state, position, reward, next_state, done)
                         if check:
                             if defausse.number != 0:
                                 pioche.DefausseJeton(defausse)
-                            self.set_plateau(next_state)
+                            self.plateau = newPlateau
                     if len(pioche.PIOCHE) == 0:
                         done = True
+                #affichage
                 self.aff_plateau()
+                print("============================")
 
         print("Starting training")
         global_counter = 0
@@ -175,14 +179,14 @@ class JoueurIA:
                 while not check:
                     steps += 1
                     position = trainer.bestAction(state)
-                    next_state, reward, done, check, defausse = self.poseJeton(jeton, position)
-                    next_state = np.reshape(next_state, [1, 16])
+                    newPlateau, reward, done, check, defausse = self.poseJeton(jeton, position)
+                    next_state = self.getState(False)
                     score += reward
                     trainer.remember(state, position, reward, next_state, done)
                     if check:
                         if defausse.number != 0:
                             pioche.DefausseJeton(defausse)
-                        self.set_plateau(next_state)
+                        self.plateau = newPlateau
                 trainer.actu_epsilon()
 
                 if len(pioche.PIOCHE) == 0:
