@@ -30,7 +30,6 @@ class JoueurIA:
         self.plateau = plateau
         self.jeton = Jeton()
 
-    #TODO
     def verification(self, newPlateau, ligne, colonne):
         number = newPlateau[ligne][colonne].number
         if ligne != 0:
@@ -65,9 +64,9 @@ class JoueurIA:
                 state.append(self.plateau[i][j].number)
         if getJeton:
             state.append(self.jeton.number)
-            state = np.reshape(state, [1, 17])
+            state = np.reshape(state, (-1,17))
         else:
-            state = np.reshape(state, [1, 16])
+            state = np.reshape(state, (-1,16))
         return state
 
     def newJeton(self, jeton):
@@ -160,8 +159,8 @@ class JoueurIA:
                     if len(pioche.PIOCHE) == 0:
                         done = True
                 #affichage
-                self.aff_plateau()
-                print("============================")
+                # self.aff_plateau()
+                # print("============================")
 
         print("Starting training")
         global_counter = 0
@@ -200,10 +199,11 @@ class JoueurIA:
                     scores.append(score)
                     epsilons.append(trainer.epsilon)
 
-            if e % 200 == 0:
+            if e % 100 == 0:
                 print("episode: {}/{}, moves: {}, score: {}, epsilon: {}, loss: {}"
                       .format(e, episodes, steps, score, trainer.epsilon, losses[-1]))
                 self.aff_plateau()
+                print("===============")
 
             if e > 0 and e % snapshot == 0:
                 trainer.save(id='iteration-%s' % e)
@@ -212,5 +212,5 @@ class JoueurIA:
 
 pioche = Pioche()
 joueur = JoueurIA(pioche.piocheJeton(), pioche.piocheJeton(), pioche.piocheJeton(), pioche.piocheJeton())
-trainer = Trainer(learning_rate=0.001, epsilon_decay=0.9999999995)
+trainer = Trainer(learning_rate=0.001, epsilon_decay=0.99999995)
 scores, losses, epsilons = joueur.train(35000, trainer, True, snapshot=2500)

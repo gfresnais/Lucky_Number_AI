@@ -33,6 +33,7 @@ class Trainer:
             model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=self.learning_rate))
 
         self.model = model
+        model.summary()
 
     def remember(self, state, action, reward, next_state, done):
         self.memory.append([state, action, reward, next_state, done])
@@ -66,10 +67,7 @@ class Trainer:
 
         for i, (state, action, reward, next_state, done) in enumerate(minibatch):
             target = self.model.predict(state)[0]
-            if done:
-                target[action] = reward
-            else:
-                target[action] = reward + self.gamma * np.max(self.model.predict(next_state))
+            target[action] = reward
 
             inputs[i] = state
             outputs[i] = target
