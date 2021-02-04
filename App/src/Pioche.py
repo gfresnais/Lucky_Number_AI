@@ -36,5 +36,5 @@ class Pioche:
     
     #fonction qui ajoute un jeton à la défausse
     def DefausseJeton(self, jeton):
-        self.PIOCHE.append(jeton)
-    
+        if jeton.number != 0:
+            self.PIOCHE.append(jeton)
