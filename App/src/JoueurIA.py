@@ -30,6 +30,12 @@ class JoueurIA:
         self.plateau = plateau
         self.jeton = Jeton()
 
+    def play(self, new_jeton):
+        return self.jeton, self.plateau
+
+    def get_plateau(self):
+        return self.plateau
+
     def verification(self, newPlateau, ligne, colonne):
         number = newPlateau[ligne][colonne].number
         if ligne != 0:
@@ -199,7 +205,7 @@ class JoueurIA:
                     scores.append(score)
                     epsilons.append(trainer.epsilon)
 
-            if e % 100 == 0:
+            if e % 10 == 0:
                 print("episode: {}/{}, moves: {}, score: {}, epsilon: {}, loss: {}"
                       .format(e, episodes, steps, score, trainer.epsilon, losses[-1]))
                 self.aff_plateau()
@@ -212,5 +218,5 @@ class JoueurIA:
 
 pioche = Pioche()
 joueur = JoueurIA(pioche.piocheJeton(), pioche.piocheJeton(), pioche.piocheJeton(), pioche.piocheJeton())
-trainer = Trainer(learning_rate=0.001, epsilon_decay=0.99999995)
-scores, losses, epsilons = joueur.train(35000, trainer, True, snapshot=2500)
+trainer = Trainer(learning_rate=0.001, epsilon_decay=0.9999995)
+scores, losses, epsilons = joueur.train(5000, trainer, True, snapshot=1000)
