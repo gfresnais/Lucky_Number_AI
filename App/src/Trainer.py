@@ -35,8 +35,8 @@ class Trainer:
         self.model = model
         model.summary()
 
-    def remember(self, state, action, reward, next_state, done):
-        self.memory.append([state, action, reward, next_state, done])
+    def remember(self, state, action, reward):
+        self.memory.append([state, action, reward])
 
     def randomAction(self):
         return random.randrange(self.action_size)
@@ -65,7 +65,7 @@ class Trainer:
         inputs = np.zeros((batch_size, self.state_size))
         outputs = np.zeros((batch_size, self.action_size))
 
-        for i, (state, action, reward, next_state, done) in enumerate(minibatch):
+        for i, (state, action, reward) in enumerate(minibatch):
             target = self.model.predict(state)[0]
             target[action] = reward
 
