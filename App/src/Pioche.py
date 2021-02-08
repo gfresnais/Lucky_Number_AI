@@ -38,3 +38,12 @@ class Pioche:
     def DefausseJeton(self, jeton):
         if jeton.number != 0:
             self.PIOCHE.append(jeton)
+
+    # fonction qui pioche un jeton dans la pioche et le retourne
+    def piocheJetonIA(self):
+        if len(self.PIOCHE) != 0:
+            index = random.randrange(len(self.PIOCHE))
+            return self.PIOCHE.pop(index)
+        else:
+            index = random.randrange(len(self.DEFAUSSE))
+            return self.DEFAUSSE.pop(index)
