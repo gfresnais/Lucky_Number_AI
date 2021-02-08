@@ -10,4 +10,3 @@ class Game:
         self.jeton = Jeton()
         self.joueur = Joueur(self.pioche.piocheJeton(), self.pioche.piocheJeton(), self.pioche.piocheJeton(), self.pioche.piocheJeton())
         self.JoueurIA(self.pioche.piocheJeton(), self.pioche.piocheJeton(), self.pioche.piocheJeton(), self.pioche.piocheJeton())
-

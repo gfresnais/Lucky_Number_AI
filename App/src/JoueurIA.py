@@ -29,7 +29,7 @@ class JoueurIA:
         plateau[3][3] = setDeJeton[3]
         self.plateau = plateau
         self.jeton = Jeton()
-        self.trainer = Trainer(learning_rate=0.001, epsilon_decay=0.9999995)
+        self.trainer = Trainer(learning_rate=0.001, epsilon_decay=0.99999)
 
     def play_random(self, new_jeton):
         return self.play(new_jeton, True)
@@ -110,9 +110,9 @@ class JoueurIA:
         newPlateau[ligne][colonne] = jeton
         if self.verification(newPlateau, ligne, colonne):
             if self.checkWin(newPlateau):
-                return newPlateau, 10, True, True, self.plateau[ligne][colonne]
+                return newPlateau, 50, True, True, self.plateau[ligne][colonne]
             else:
-                return newPlateau, 1, False, True, self.plateau[ligne][colonne]
+                return newPlateau, 2, False, True, self.plateau[ligne][colonne]
         else:
             return newPlateau, -1, False, False, Jeton() #faux jeton
 
@@ -165,7 +165,7 @@ class JoueurIA:
                 done = False
                 while not done:
                     steps += 1
-                    jeton = self.newJeton(pioche.piocheJeton())
+                    jeton = self.newJeton(pioche.piocheJetonIA())
                     state = self.getState()
                     # self.aff_plateau()
                     # print('jeton :' + str(jeton.number))
@@ -192,20 +192,18 @@ class JoueurIA:
             steps = 0
             while not done:
                 global_counter += 1
-                jeton = self.newJeton(pioche.piocheJeton())
+                jeton = self.newJeton(pioche.piocheJetonIA())
                 state = self.getState()
                 check = False
                 while not check:
                     steps += 1
                     position = trainer.bestAction(state)
-                    newPlateau, reward, done, check, _ = self.poseJeton(jeton, position)
+                    newPlateau, reward, done, check, defausse = self.poseJeton(jeton, position)
                     score += reward
                     trainer.remember(state, position, reward)
                 self.plateau = newPlateau
                 trainer.actu_epsilon()
-
-                if len(pioche.PIOCHE) == 0:
-                    done = True
+                pioche.DefausseJeton(defausse)
 
                 if global_counter % 100 == 0:
                     l = trainer.replay(batch_size)
