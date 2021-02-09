@@ -33,7 +33,7 @@ class Trainer:
             model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=self.learning_rate))
 
         self.model = model
-        model.summary()
+        # model.summary()
 
     def remember(self, state, action, reward):
         self.memory.append([state, action, reward])

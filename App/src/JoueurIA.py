@@ -29,7 +29,7 @@ class JoueurIA:
         plateau[3][3] = setDeJeton[3]
         self.plateau = plateau
         self.jeton = Jeton()
-        self.trainer = Trainer(learning_rate=0.001, epsilon_decay=0.99999)
+        self.trainer = Trainer(learning_rate=0.001, epsilon_decay=0.999995)
 
     def play_random(self, new_jeton):
         return self.play(new_jeton, True)
@@ -190,6 +190,7 @@ class JoueurIA:
             score = 0
             done = False
             steps = 0
+            play = 0
             while not done:
                 global_counter += 1
                 jeton = self.newJeton(pioche.piocheJetonIA())
@@ -204,6 +205,7 @@ class JoueurIA:
                 self.plateau = newPlateau
                 trainer.actu_epsilon()
                 pioche.DefausseJeton(defausse)
+                play += 1
 
                 if global_counter % 100 == 0:
                     l = trainer.replay(batch_size)
@@ -214,8 +216,8 @@ class JoueurIA:
                     epsilons.append(trainer.epsilon)
 
             if e % 10 == 0:
-                print("episode: {}/{}, moves: {}, score: {}, epsilon: {}, loss: {}"
-                      .format(e, episodes, steps, score, trainer.epsilon, losses[-1]))
+                print("episode: {}/{}, moves: {}, play: {}, score: {}, epsilon: {}, loss: {}"
+                      .format(e, episodes, steps, play, score, trainer.epsilon, losses[-1]))
                 self.aff_plateau()
                 print("===============")
 
@@ -223,7 +225,3 @@ class JoueurIA:
                 trainer.save(id='iteration-%s' % e)
 
         return scores, losses, epsilons
-
-pioche = Pioche()
-joueur = JoueurIA(pioche.piocheJeton(), pioche.piocheJeton(), pioche.piocheJeton(), pioche.piocheJeton())
-scores, losses, epsilons = joueur.train(5000, True, snapshot=1000)
