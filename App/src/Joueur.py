@@ -28,4 +28,3 @@ class Joueur:
 
     def get_list_jeton(self):
         return self.list_jeton
-

@@ -9,11 +9,9 @@ game = Game()
 
 @app.route('/')
 def acceuil():
-    jeton1 = game.pioche.piocheJeton()
-    jeton2 = game.pioche.piocheJeton()
-    jeton3 = game.pioche.piocheJeton()
-    jeton4 = game.pioche.piocheJeton()
-    return render_template('Acceuil.html')
+    for i in range(4):
+        game.joueur.add_jeton(game.pioche.piocheJeton())
+    return render_template('Acceuil.html', game)
 
 @app.route('/index')
 def index():

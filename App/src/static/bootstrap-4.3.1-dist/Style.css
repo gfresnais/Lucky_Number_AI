@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
   
-
+body{
+    background-color: #fff0;
+}
 
 .myclass{
     display:inline-block;

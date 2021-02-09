@@ -2,19 +2,17 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-4.3.1-dist/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-4.3.1-dist/Style.css') }}">
         <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/210128-1122/css/common.css">
         <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/210128-1122/css/gameserver.css">
-        <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/current/css/libraries.css?1">
-        <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/current/games/luckynumbers/201211-0005/luckynumbers.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-4.3.1-dist/Style.css') }}">
         <meta charset="UTF-8">
         <title>Acceuil</title>
     </head>
-    <body>
+    <body style="background-color: #fff0;">
         <div>
-            <h1  class="text-center">Lucky Numbers</h1>
+            <h1 class="text-center font-weight-bold">Lucky Numbers</h1>
             <br>
-            <h2  class="text-center">Principe du jeu</h2>
+            <h2 class="text-center">Principe du jeu</h2>
             <br>
             <p class="text-center">
                 Chaque joueur essaye de compléter le premier son jardin avec des trèfles.<br>
@@ -24,7 +22,21 @@
                     soient toujours classés dans l’ordre croissant.
                 </p>
             </p>
-
+            <br>
+            <h2 class="text-center">Préparation du jeu</h2>
+            <br>
+            <p class="text-center">
+                Chaque joueur reçoit un plateau qu’il place devant lui, la coccinelle en bas à droite.<br>
+                Tous les trèfles sont placé à coté du joueur.<br>
+                La pioches et la défausse sont gérés par le logiciel<br>
+                le joueur doit illustrer avec les jetons ce qui se déroule à l'écran.<br>
+                <br>
+                Complété la diagonale avec les 4 premiers jetons désignés à l'écran.
+            </p>
+            <img src="{{ url_for('static', filename=jeton1.image) }}">
+            <img src="{{ url_for('static', filename=jeton2.image) }}">
+            <img src="{{ url_for('static', filename=jeton3.image) }}">
+            <img src="{{ url_for('static', filename=jeton4.image) }}">
 
         </div>
     </body>
