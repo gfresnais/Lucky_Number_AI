@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/Style.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-4.3.1-dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-4.3.1-dist/Style.css') }}">
+        <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/210128-1122/css/common.css">
+        <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/210128-1122/css/gameserver.css">
+        <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/current/css/libraries.css?1">
+        <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/current/games/luckynumbers/201211-0005/luckynumbers.css">
         <meta charset="UTF-8">
         <title>Acceuil</title>
     </head>
     <body>
         <div>
-            <h1>Lucky Numbers</h1>
+            <h1  class="text-center">Lucky Numbers</h1>
+            <br>
+            <h2  class="text-center">Principe du jeu</h2>
+            <br>
+            <p class="text-center">
+                Chaque joueur essaye de compléter le premier son jardin avec des trèfles.<br>
+                Mais pour cela, il doit veiller constamment à ce que
+                <p class="text-center" style="color: red;">
+                    les nombres dans chaque rangée et chaque colonne<br>
+                    soient toujours classés dans l’ordre croissant.
+                </p>
+            </p>
 
-            <h2>Régle :</h2>
 
-            <img src="{{ url_for('static', filename='images/regle/regle1.png') }}" alt="Regle1"><br>
-            <img src="App/res/images/regle/regle2" alt="Regle2"><br>
-            <img src="App/res/images/regle/regle3" alt="Regle3"><br>
-            <img src="App/res/images/regle/regle4" alt="Regle4"><br>
         </div>
     </body>
 </html>

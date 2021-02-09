@@ -15,6 +15,9 @@ def acceuil():
     jeton4 = game.pioche.piocheJeton()
     return render_template('Acceuil.html')
 
+@app.route('/index')
+def index():
+    return render_template('index.html')
 
 
 app.run()
