@@ -11,7 +11,7 @@ import numpy as np
 
 class Trainer:
 
-    def __init__(self, name=None, learning_rate=0.001, epsilon_decay=0.9999, batch_size=30, memory_size=3000):
+    def __init__(self, name=None, learning_rate=0.001, epsilon_decay=0.9999, batch_size=64, memory_size=3000):
         self.state_size = 17
         self.action_size = 16
         self.gamma = 0.9

@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+    <head>
+        <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/Style.css">
+        <meta charset="UTF-8">
+        <title>Acceuil</title>
+    </head>
+    <body>
+        <div>
+            <h1>Lucky Numbers</h1>
 
-    <title>Acceuil</title>
-</head>
-<body>
-    <h1>Lucky Numbers</h1>
+            <h2>Régle :</h2>
 
-    <h2>Régle :</h2>
-
-    <img src="App/res/images/regle/regle1.PNG">
-    <img src="App/res/images/regle/regle1.PNG">
-    <img src="App/res/images/regle/regle1.PNG">
-    <img src="App/res/images/regle/regle1.PNG">
-
-</body>
+            <img src="{{ url_for('static', filename='images/regle/regle1.png') }}" alt="Regle1"><br>
+            <img src="App/res/images/regle/regle2" alt="Regle2"><br>
+            <img src="App/res/images/regle/regle3" alt="Regle3"><br>
+            <img src="App/res/images/regle/regle4" alt="Regle4"><br>
+        </div>
+    </body>
 </html>

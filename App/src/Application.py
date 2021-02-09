@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template
 
 from App.src.Game import Game
