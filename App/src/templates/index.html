@@ -35,15 +35,12 @@
                             </button>
                         </div>
                                     
-                        <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 10px;height: 70px;">
+                        <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 10px;height: 70px; background-color: transparent;">
                             {% for jeton in game.joueur.get_list() %}
                             <button >
                                 <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton" class="jeton-joueur">
                             </button>
-                            <p>{{loop.index0}}</p>
-                            {% if (loop.index0 % 4) eq(0) %}
-                                <br>
-                            {% endif %}
+
                             {% endfor %}
                         </div>
                     </div>

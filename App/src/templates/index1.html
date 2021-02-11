@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/Style.css">
+        <title>Lucky Numbers</title>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 justify-content-center">
+                    {% for jeton in game.joueur.get_list() %}
+                    <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton" class="jeton-joueur">
+                    {% endfor %}
+                </div> <br>
+
+               </div>
+               <div class="col-6 h-75 d-inline-block" style="background-color: deepskyblue;">
+                <button type="button" class="btn btn-dark" onclick="window.location.href ='ActionJoueur.html'">
+                    Je pioche
+                </button>
+                 <div class="row justify-content-center">
+                 {% for jeton in game.pioche.DEFAUSSE %}
+                    <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton" class="jeton-joueur">
+                 {% endfor %}
+                 </div>
+                     <br>
+
+               </div>
+               <div class="col-6 h-75 d-inline-block" style="background-color: deeppink;">
+                <h1 class="text-center font-weight-bold">Plateau IA</h1>
+                   <img src="{{ url_for('static', filename='bootstrap-4.3.1-dist/images/plateau_IA.jpg') }}" alt="" />
+             </div>
+            </div>
+         </div>
+
+    </body>
+</html>
