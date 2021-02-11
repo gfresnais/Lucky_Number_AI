@@ -29,7 +29,7 @@ class JoueurIA:
         plateau[3][3] = setDeJeton[3]
         self.plateau = plateau
         self.jeton = Jeton()
-        self.trainer = Trainer(learning_rate=0.001, epsilon_decay=0.9999995)
+        self.trainer = Trainer(learning_rate=0.001, epsilon_decay=0.999999)
 
     def play_random(self, new_jeton):
         return self.play(new_jeton, True)

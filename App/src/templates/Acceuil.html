@@ -33,10 +33,11 @@
                 <br>
                 Complété la diagonale avec les 4 premiers jetons désignés à l'écran.
             </p>
-            <img src="{{ url_for('static', filename=jeton1.image) }}">
-            <img src="{{ url_for('static', filename=jeton2.image) }}">
-            <img src="{{ url_for('static', filename=jeton3.image) }}">
-            <img src="{{ url_for('static', filename=jeton4.image) }}">
+            <div class="row justify-content-center">
+                {% for jeton in game.joueur.get_list() %}
+                <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton">
+                {% endfor %}
+            </div> <br>
 
         </div>
     </body>

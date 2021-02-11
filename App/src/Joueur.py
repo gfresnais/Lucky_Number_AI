@@ -26,5 +26,5 @@ class Joueur:
     def get_jeton(self):
         return self.jeton
 
-    def get_list_jeton(self):
+    def get_list(self):
         return self.list_jeton

@@ -8,10 +8,9 @@ app = Flask(__name__)
 game = Game()
 
 @app.route('/')
+@app.route('/Acceuil')
 def acceuil():
-    for i in range(4):
-        game.joueur.add_jeton(game.pioche.piocheJeton())
-    return render_template('Acceuil.html', game)
+    return render_template('Acceuil.html', game=game)
 
 @app.route('/index')
 def index():

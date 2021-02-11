@@ -26,14 +26,12 @@ class Trainer:
             model = keras.load_model("App/res/Assets/Model-" + name)
         else:
             model = keras.Sequential()
-            model.add(layers.Dense(64, input_dim=self.state_size, activation='relu'))
-            model.add(layers.Dense(64, activation='relu'))
-            model.add(layers.Dense(32, activation='relu'))
+            model.add(layers.Dense(16, input_dim=self.state_size, activation='relu'))
+            model.add(layers.Dense(16, activation='relu'))
             model.add(layers.Dense(self.action_size, activation='linear'))
             model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=self.learning_rate))
 
         self.model = model
-        # model.summary()
 
     def remember(self, state, action, reward):
         self.memory.append([state, action, reward])
