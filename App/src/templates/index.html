@@ -1,7 +1,7 @@
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/Style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-4.3.1-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-4.3.1-dist/Style.css') }}">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/210128-1122/css/common.css">
@@ -36,10 +36,11 @@
                         </div>
                                     
                         <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 10px;height: 70px;">
-                            <button type="button" class="myclass"></button>
-                            <button type="button" class="myclass"></button>
-                            <button type="button" class="myclass"></button>
-                            <button type="button" class="myclass"></button>
+                            {% for jeton in game.joueur.get_list() %}
+                            <button>
+                                <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton" class="jeton-joueur">
+                            </button>
+                            {% endfor %}
                         </div>
                     </div>
 
