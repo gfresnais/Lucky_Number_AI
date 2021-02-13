@@ -19,5 +19,4 @@ def index():
     game.joueur.add_jeton(game.pioche.piocheJeton())
     return render_template('index1.html', game=game)
 
-
 app.run()
