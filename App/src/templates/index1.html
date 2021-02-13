@@ -41,7 +41,7 @@
                         Je pioche
                     </button>
                     <div class="row justify-content-center">
-                    {% for jeton in game.joueur.get_list() %}
+                    {% for jeton in game.pioche.DEFAUSSE %}
                         <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton" class="jeton-joueur">
                     {% endfor %}
                     </div>
