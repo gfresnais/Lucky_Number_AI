@@ -27,3 +27,9 @@ body{
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.plateau{
+    background-image : url("bootstrap-4.3.1-dist/images/Plateau.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}

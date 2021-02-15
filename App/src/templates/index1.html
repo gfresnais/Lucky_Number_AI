@@ -14,7 +14,8 @@
          console.log( "ready!" );
           });
 
-            function showElement(){
+            function showElement(url){
+
                  $("#piocher").show();
 
                  }
@@ -22,6 +23,7 @@
 
             function hideElement(){
                  $("#piocher").hide();
+
                  }
 </script>
         <title>Lucky Numbers</title>
@@ -49,7 +51,7 @@
                 <div class="col-2" >
                     <div id="piocher">
                         Vous avez tiré un nouveau jeton
-                        <img id="image" src="">
+                        <img id="image" src="{{ url_for('static', filename=game.pioche.piocheJeton().image) }}" alt="image_jeton" class="jeton-joueur">
                         <button  type="button" class="btn btn-dark center" onclick="hideElement()">
                            J'ai fini
                         </button>
@@ -57,7 +59,14 @@
                 </div>
                 <div class="col-5 h-75 d-inline-block">
                     <h1 class="text-center font-weight-bold">Plateau IA</h1>
-                    <img src="{{ url_for('static', filename='bootstrap-4.3.1-dist/images/plateau_IA.jpg') }}" alt="" class="center"/>
+
+                    <div class ="col-6 center">
+                        {% for ligne in game.joueurIA.get_plateau() %}
+                            {% for jeton in ligne %}
+                                <img src="{{ url_for('static', filename=jeton.image) }}"  alt="" class="jeton-joueur">
+                            {% endfor %}
+                        {% endfor %}
+                  </div>
                 </div>
             </div>
         </div>
