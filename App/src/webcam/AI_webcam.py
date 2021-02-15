@@ -38,6 +38,9 @@ def main():
         # if 'c' key is pressed, process the frame for OCR
         if cv2.waitKey(1) & 0xFF == ord('c'):
             img = cv2.resize(frame, (160, 160))
+
+            cv2.imshow("Resized", img)
+
             # convert the frame to an array
             img_array = keras.preprocessing.image.img_to_array(img)
             img_array = tf.expand_dims(img_array, 0)
