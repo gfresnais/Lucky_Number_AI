@@ -8,10 +8,10 @@ from threading import Thread
 import cv2
 import numpy as np
 
-
 """
 Uses OpenCV to capture a camera video stream
 """
+
 
 class WebcamVideoStream:
     def __init__(self, src=0):
@@ -66,4 +66,3 @@ class WebcamVideoStream:
 
         # convert the image back to bgr color space
         return cv2.cvtColor(bitwise, cv2.COLOR_HSV2BGR)
-
