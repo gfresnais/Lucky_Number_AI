@@ -60,7 +60,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: #005F3A;
 }
 
 [tabindex="-1"]:focus {
@@ -706,6 +706,7 @@ pre code {
   -ms-flex: 0 0 100%;
   flex: 0 0 100%;
   max-width: 100%;
+  text-align: center;
 }
 
 .order-first {

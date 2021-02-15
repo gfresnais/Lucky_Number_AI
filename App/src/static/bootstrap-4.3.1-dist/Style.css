@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
   
 body{
-    background-color: #fff0;
+    background-color : #005F3A !important;
 }
 
 .jeton-joueur {
@@ -14,4 +14,22 @@ body{
     background: url(https://x.boardgamearena.net/data/themereleases/current/games/luckynumbers/201211-0005/img/clover_back.png);
     background-repeat: no-repeat;
     width: 80px;
+}
+
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.jeton{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.plateau{
+    background-image : url("bootstrap-4.3.1-dist/images/Plateau.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
 }

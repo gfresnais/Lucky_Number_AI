@@ -2,13 +2,11 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-4.3.1-dist/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/210128-1122/css/common.css">
-        <link rel="stylesheet" type="text/css" href="https://x.boardgamearena.net/data/themereleases/210128-1122/css/gameserver.css">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-4.3.1-dist/Style.css') }}">
         <meta charset="UTF-8">
         <title>Acceuil</title>
     </head>
-    <body style="background-color: #fff0;">
+    <body>
         <div>
             <h1 class="text-center font-weight-bold">Lucky Numbers</h1>
             <br>
@@ -38,7 +36,7 @@
                 <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton">
                 {% endfor %}
             </div> <br>
-
+                <button type="button" class="btn center btn-light" onclick="window.location.href='index'"> Jouer </button>
         </div>
     </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-4.3.1-dist/Style.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+        $(function() {
+        $("#piocher").hide();
+         console.log( "ready!" );
+          });
+
+            function showElement(url){
+
+                 $("#piocher").show();
+
+                 }
+
+
+            function hideElement(){
+                 $("#piocher").hide();
+
+                 }
+</script>
+        <title>Lucky Numbers</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center jeton">
+                    {% for jeton in game.joueur.get_list() %}
+                    <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton" class="jeton-joueur">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 h-75 d-inline-block">
+                    <button type="button" class="btn btn-dark" onclick="showElement()">
+                        Je pioche
+                    </button>
+                    <div class="row justify-content-center">
+                    {% for jeton in game.pioche.DEFAUSSE %}
+                        <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton" class="jeton-joueur">
+                    {% endfor %}
+                    </div>
+                </div>
+                <div class="col-2" >
+                    <div id="piocher">
+                        Vous avez tiré un nouveau jeton
+                        <img id="image" src="{{ url_for('static', filename=game.pioche.piocheJeton().image) }}" alt="image_jeton" class="jeton-joueur">
+                        <button  type="button" class="btn btn-dark center" onclick="hideElement()">
+                           J'ai fini
+                        </button>
+                    </div>
+                </div>
+                <div class="col-5 h-75 d-inline-block">
+                    <h1 class="text-center font-weight-bold">Plateau IA</h1>
+
+                    <div class ="col-6 center">
+                        {% for ligne in game.joueurIA.get_plateau() %}
+                            {% for jeton in ligne %}
+                                <img src="{{ url_for('static', filename=jeton.image) }}"  alt="" class="jeton-joueur">
+                            {% endfor %}
+                        {% endfor %}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
