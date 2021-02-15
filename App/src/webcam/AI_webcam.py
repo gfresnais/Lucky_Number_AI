@@ -37,19 +37,19 @@ def main():
             break
         # if 'c' key is pressed, process the frame for OCR
         if cv2.waitKey(1) & 0xFF == ord('c'):
+            img = cv2.resize(frame, (160, 160))
             # convert the frame to an array
-            img_array = keras.preprocessing.image.img_to_array(frame)
+            img_array = keras.preprocessing.image.img_to_array(img)
             img_array = tf.expand_dims(img_array, 0)
 
             # get a prediction
             predictions = model.predict(img_array)
-            classes = predictions.argmax(axis=-1)
             score = tf.nn.softmax(predictions[0])
 
             # RESULT
             print(
                 "This image most likely belongs to {} with a {:.2f} percent confidence."
-                .format(classes[np.argmax(score)], 100 * np.max(score))
+                    .format(np.argmax(score), 100 * np.max(score))
             )
 
     # close the window and de-allocate any associated memory usage

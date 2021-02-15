@@ -54,13 +54,12 @@ def main():
 
             # get a prediction
             predictions = interpreter.get_tensor(output_details[0]['index'])
-            classes = predictions.argmax(axis=-1)
             score = tf.nn.softmax(predictions[0])
 
             # RESULT
             print(
                 "This image most likely belongs to {} with a {:.2f} percent confidence."
-                .format(classes[np.argmax(score)], 100 * np.max(score))
+                .format(np.argmax(score), 100 * np.max(score))
             )
 
     # close the window and de-allocate any associated memory usage
