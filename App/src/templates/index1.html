@@ -17,14 +17,14 @@
             function showElement(url){
 
                  $("#piocher").show();
-
                  }
 
 
             function hideElement(){
                  $("#piocher").hide();
+                 location.reload(true);
+            }
 
-                 }
 </script>
         <title>Lucky Numbers</title>
     </head>
@@ -33,25 +33,30 @@
             <div class="row">
                 <div class="col-12 d-flex justify-content-center jeton">
                     {% for jeton in game.joueur.get_list() %}
-                    <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton" class="jeton-joueur">
+                        <button class="bouton-jeton" onclick="">
+                        <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton" class="jeton-joueur" >
+                        </button>
                     {% endfor %}
                 </div>
             </div>
             <div class="row">
                 <div class="col-5 h-75 d-inline-block">
-                    <button type="button" class="btn btn-dark" onclick="showElement()">
+                    <button type="button" class="btn btn-dark center" onclick="showElement()">
                         Je pioche
                     </button>
                     <div class="row justify-content-center">
                     {% for jeton in game.pioche.DEFAUSSE %}
+                    <button class="bouton-jeton">
                         <img src="{{ url_for('static', filename=jeton.image) }}" alt="image_jeton" class="jeton-joueur">
+                    </button>
+
                     {% endfor %}
                     </div>
                 </div>
                 <div class="col-2" >
                     <div id="piocher">
-                        Vous avez tiré un nouveau jeton
-                        <img id="image" src="{{ url_for('static', filename=game.pioche.piocheJeton().image) }}" alt="image_jeton" class="jeton-joueur">
+                        Vous avez tiré un nouveau jeton <br>
+                        <img id="image" src="{{ url_for('static', filename=game.joueur.add_jeton(game.pioche.piocheJeton()).image) }}" alt="image_jeton center" class="jeton-joueur">
                         <button  type="button" class="btn btn-dark center" onclick="hideElement()">
                            J'ai fini
                         </button>
@@ -70,5 +75,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>
