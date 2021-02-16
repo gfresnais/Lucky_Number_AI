@@ -28,8 +28,9 @@ body{
     margin-bottom: 50px;
 }
 
-.plateau{
-    background-image : url("bootstrap-4.3.1-dist/images/Plateau.jpg");
-    background-size: contain;
-    background-repeat: no-repeat;
+.bouton-jeton{
+
+    border: none;
+    background-color: #005f3a;
+
 }
