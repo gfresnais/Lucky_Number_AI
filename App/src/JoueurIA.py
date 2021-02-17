@@ -14,7 +14,7 @@ from App.src.Trainer import Trainer
 
 class JoueurIA:
     
-    def __init__(self, firstJeton, secondJeton, thirdJeton, fourthJeton):
+    def __init__(self, firstJeton, secondJeton, thirdJeton, fourthJeton, name=None):
         setDeJeton = [firstJeton, secondJeton, thirdJeton, fourthJeton]
         plateau = []
         for i in range(4):
@@ -29,26 +29,27 @@ class JoueurIA:
         plateau[3][3] = setDeJeton[3]
         self.plateau = plateau
         self.jeton = Jeton()
-        self.trainer = Trainer(learning_rate=0.001, epsilon_decay=0.999999)
+        self.trainer = Trainer(name, learning_rate=0.001, epsilon_decay=0.999999)
 
     def play_random(self, new_jeton):
         return self.play(new_jeton, True)
 
-    def play(self, new_jeton, random=True):
+    def play(self, new_jeton, random=False):
         self.newJeton(new_jeton)
         check = False
+        done = False
         if random :
             while not check:
                 position = self.trainer.randomAction()
-                newPlateau, _, _, check, defausse = self.poseJeton(self.jeton, position)
+                newPlateau, _, done, check, defausse = self.poseJeton(self.jeton, position)
             self.plateau = newPlateau
         else:
             while not check:
                 plateau = self.getState()
                 position = self.trainer.bestAction(plateau, False)
-                newPlateau, _, _, check, defausse = self.poseJeton(self.jeton, position)
+                newPlateau, _, done, check, defausse = self.poseJeton(self.jeton, position)
             self.plateau = newPlateau
-        return defausse
+        return done, defausse
 
     def get_plateau(self):
         return self.plateau

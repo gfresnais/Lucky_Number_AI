@@ -31,7 +31,6 @@ class Pioche:
     #fonction qui pioche un jeton donné dans la défausse
     def piocheDefausse(self, jeton):
         index = self.PIOCHE.index(jeton)
-        
         return self.PIOCHE.pop(index)
     
     #fonction qui ajoute un jeton à la défausse

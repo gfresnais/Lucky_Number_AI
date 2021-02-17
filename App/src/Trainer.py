@@ -23,7 +23,7 @@ class Trainer:
         self.batch_size = batch_size
         self.name = name
         if name is not None :
-            model = keras.load_model("App/res/Assets/Model-" + name)
+            model = keras.models.load_model("../res/Assets/model-" + name)
         else:
             model = keras.Sequential()
             model.add(layers.Dense(16, input_dim=self.state_size, activation='relu'))
